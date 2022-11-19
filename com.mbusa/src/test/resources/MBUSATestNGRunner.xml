@@ -8,6 +8,21 @@
 
     <parameter name="browser" value="chrome"/>
     <parameter name="url" value="http://mbusa.com"/>
+    <test name="Tests">
+        <classes>
+            <!--<class name="Tests.LoginTest1"/>-->
+            <!--<class name="Tests.TestLogout1"/>-->
+            <!--<class name="Tests.SavedPageTest"/>-->
+            <class name="Tests.TestFindADealer">
+
+            </class>
+
+
+
+
+        </classes>
+
+    </test>
 
     <test name="test">
     </test>

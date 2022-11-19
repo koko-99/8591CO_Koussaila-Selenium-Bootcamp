@@ -8,5 +8,18 @@
 
     <parameter name="browser" value="chrome"/>
     <parameter name="url" value="https://www.apartments.com"/>
+    <test name="tests">
+        <classes>
+            <!--<class name="Tests.SignupTest"/>-->
+            <!--<class name="Tests.TestLogout"/>-->
+            <!--<class name="Tests.TestAddProperties"/>-->
+            <class name="Tests.TestSearch"/>
+
+
+
+
+        </classes>
+
+    </test>
 
 </suite>

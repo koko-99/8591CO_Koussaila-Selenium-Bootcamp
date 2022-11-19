@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.*;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+import org.testng.annotations.Optional;
 import reporting.ExtentManager;
 import reporting.ExtentTestManager;
 import utils.Database;
@@ -26,10 +27,7 @@ import utils.ExcelData;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.time.Duration;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 
 public class BasePage {
@@ -82,7 +80,7 @@ public class BasePage {
 
     @Parameters({"driverConfigEnabled", "browser", "url"})
     @BeforeMethod
-    public void driverSetup(@Optional("true") String driverConfigEnabled, @Optional("chrome") String browser, @Optional("http://espn.com") String url) {
+    public void driverSetup(@Optional("true") String driverConfigEnabled, @Optional("chrome") String browser, @Optional("https://www.apartments.com/") String url) {
         if (Boolean.parseBoolean(driverConfigEnabled)) {
             driverInit(browser);
             driver.get(url);
@@ -92,10 +90,10 @@ public class BasePage {
     }
 
     @Parameters({"driverConfigEnabled"})
-    @AfterMethod
+    @AfterMethod(enabled = false)
     public void cleanUp(@Optional("true") String driverConfigEnabled) {
         if (Boolean.parseBoolean(driverConfigEnabled)) {
-            driver.close();
+            /*driver.close();*/
             driver.quit();
         }
     }
@@ -229,6 +227,7 @@ public class BasePage {
     }
 
     public void switchToFrameByElement(WebElement frame) {
+        webDriverWait.until(ExpectedConditions.visibilityOf(frame));
         driver.switchTo().frame(frame);
     }
 
@@ -242,6 +241,15 @@ public class BasePage {
                 driver.switchTo().window(handle);
             }
         }
+    }
+
+    public List<String> getTextListTrimmedTextElements(List<WebElement> listElements) {
+        List<String> trimmedText = new ArrayList<String>();
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(listElements));
+        for (WebElement element : listElements) {
+            trimmedText.add(getTrimmedElementText(element));
+        }
+        return trimmedText;
     }
 
     // region JavaScriptExecutor Methods
@@ -266,6 +274,7 @@ public class BasePage {
     }
 
     public void safeClickOnElement(WebElement element) {
+
         try {
             clickOnElement(element);
         } catch (ElementClickInterceptedException | StaleElementReferenceException e) {
@@ -349,6 +358,13 @@ public class BasePage {
         calendar.setTimeInMillis(millis);
         return calendar.getTime();
     }
+
+    public void waitForElementToBeVisible(WebElement element){
+        webDriverWait.until(ExpectedConditions.visibilityOf(element));
+
+    }
+
+
     // endregion
 
 }

@@ -8,5 +8,21 @@
 
     <parameter name="browser" value="chrome"/>
     <parameter name="url" value="http://ebay.com"/>
+    <test name="Tests">
+        <classes>
+            <!--<class name="Tests.TestRegister"/>-->
+            <!--<class name="Tests.TestSignIn"/>-->
+            <!--<class name="Tests.TestSearchFunctionality"/>-->
+            <!--<class name="Tests.TestClickOnItemForList"/>-->
+            <!--<class name="Tests.TestAddToCart"/>-->
+            <class name="Tests.TestCheckOut"/>
+
+
+
+
+        </classes>
+
+
+    </test>
 
 </suite>
